@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="SampleDBContext">
+    <EntitySetMapping Name="POSTs">
+      <EntityTypeMapping TypeName="Models.POST">
+        <MappingFragment StoreEntitySet="POST">
+          <ScalarProperty Name="postedDate" ColumnName="postedDate" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="postTitle" ColumnName="postTitle" />
+          <ScalarProperty Name="postDesc" ColumnName="postDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMMENTs">
+      <EntityTypeMapping TypeName="Models.COMMENT">
+        <MappingFragment StoreEntitySet="COMMENT">
+          <ScalarProperty Name="postedDate" ColumnName="postedDate" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="commentDesc" ColumnName="commentDesc" />
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="Models.Video">
+        <MappingFragment StoreEntitySet="Videos">
+          <ScalarProperty Name="VideoCategory" ColumnName="VideoCategory" />
+          <ScalarProperty Name="videoTitle" ColumnName="videoTitle" />
+          <ScalarProperty Name="videoLink" ColumnName="videoLink" />
+          <ScalarProperty Name="videoId" ColumnName="videoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

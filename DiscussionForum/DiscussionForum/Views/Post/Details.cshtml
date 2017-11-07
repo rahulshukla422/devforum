@@ -1,0 +1,35 @@
+﻿@model DiscussionForum.Models.POST
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h3><b>@Html.DisplayFor(model => model.postTitle)</b></h3>
+        <abbr style="color:blue; font-size:small" title="@Model.postedDate">  @Html.DisplayFor(model => model.postedDate)</abbr>
+ <div>
+<pre style="white-space:pre-wrap">
+@Html.DisplayFor(model => model.postDesc)</pre>
+
+        </div>
+        
+        <div class="col-md-11 col-md-push-1">
+            @foreach (var item in Model.COMMENTs)
+            {
+
+<pre style="background-color:beige; white-space:pre-wrap">
+@Html.DisplayFor(x => item.commentDesc) <br/>
+<abbr style="color:blue; font-size:small" title="@item.postedDate">@item.postedDate</abbr>
+</pre>
+            }
+        </div>
+    </div>
+
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.postId }) |*@
+    @Html.ActionLink("Comment", "Comment", new { postId = Model.postId }) | 
+    @Html.ActionLink("Back to List", "Index")
+</p>

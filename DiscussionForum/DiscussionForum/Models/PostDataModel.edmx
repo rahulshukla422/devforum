@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COMMENT">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="commentDesc" Type="nvarchar(max)" />
+          <Property Name="postId" Type="int" />
+          <Property Name="postedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="POST">
+          <Key>
+            <PropertyRef Name="postId" />
+          </Key>
+          <Property Name="postId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="postTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="postDesc" Type="nvarchar(max)" />
+          <Property Name="postedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="videoId" />
+          </Key>
+          <Property Name="videoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="videoLink" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="videoTitle" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="VideoCategory" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__COMMENT__postId__5EBF139D">
+          <End Role="POST" Type="Self.POST" Multiplicity="0..1" />
+          <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POST">
+              <PropertyRef Name="postId" />
+            </Principal>
+            <Dependent Role="COMMENT">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="COMMENT" EntityType="Self.COMMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POST" EntityType="Self.POST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__COMMENT__postId__5EBF139D" Association="Self.FK__COMMENT__postId__5EBF139D">
+            <End Role="POST" EntitySet="POST" />
+            <End Role="COMMENT" EntitySet="COMMENT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="POST">
+          <Key>
+            <PropertyRef Name="postId" />
+          </Key>
+          <Property Name="postId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="postTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="COMMENTs" Relationship="Models.FK__COMMENT__postId__5EBF139D" FromRole="POST" ToRole="COMMENT" />
+          <Property Name="postedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="SampleDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="POSTs" EntityType="Self.POST" />
+          <EntitySet Name="COMMENTs" EntityType="Models.COMMENT" />
+          <AssociationSet Name="FK__COMMENT__postId__5EBF139D" Association="Models.FK__COMMENT__postId__5EBF139D">
+            <End Role="POST" EntitySet="POSTs" />
+            <End Role="COMMENT" EntitySet="COMMENTs" />
+          </AssociationSet>
+          <EntitySet Name="Videos" EntityType="Models.Video" />
+        </EntityContainer>
+        <EntityType Name="COMMENT">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="commentDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="postId" Type="Int32" />
+          <NavigationProperty Name="POST" Relationship="Models.FK__COMMENT__postId__5EBF139D" FromRole="COMMENT" ToRole="POST" />
+          <Property Name="postedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__COMMENT__postId__5EBF139D">
+          <End Type="Models.POST" Role="POST" Multiplicity="0..1" />
+          <End Type="Models.COMMENT" Role="COMMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POST">
+              <PropertyRef Name="postId" />
+            </Principal>
+            <Dependent Role="COMMENT">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="videoId" />
+          </Key>
+          <Property Name="videoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="videoLink" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="videoTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="VideoCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="SampleDBContext">
+          <EntitySetMapping Name="POSTs">
+            <EntityTypeMapping TypeName="Models.POST">
+              <MappingFragment StoreEntitySet="POST">
+                <ScalarProperty Name="postedDate" ColumnName="postedDate" />
+                <ScalarProperty Name="postId" ColumnName="postId" />
+                <ScalarProperty Name="postTitle" ColumnName="postTitle" />
+                <ScalarProperty Name="postDesc" ColumnName="postDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMMENTs">
+            <EntityTypeMapping TypeName="Models.COMMENT">
+              <MappingFragment StoreEntitySet="COMMENT">
+                <ScalarProperty Name="postedDate" ColumnName="postedDate" />
+                <ScalarProperty Name="postId" ColumnName="postId" />
+                <ScalarProperty Name="commentDesc" ColumnName="commentDesc" />
+                <ScalarProperty Name="commentId" ColumnName="commentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="Models.Video">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="VideoCategory" ColumnName="VideoCategory" />
+                <ScalarProperty Name="videoTitle" ColumnName="videoTitle" />
+                <ScalarProperty Name="videoLink" ColumnName="videoLink" />
+                <ScalarProperty Name="videoId" ColumnName="videoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

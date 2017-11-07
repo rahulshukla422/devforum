@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<link rel="shortcut icon" type="image/png" href="~/Images/fav.jpg" />
+<meta name="twitter:card" content="summary">
+<meta name="twitter:domain" content="devforum.azurewebsites.net" />
+<meta property="og:type" content="website" />
+<meta name="twitter:title" property="og:title" itemprop="title name" content="Developers Forum" />
+<meta name="twitter:description" property="og:description" itemprop="description" content="Question & Answer for professional and programmers and Coding issues" />
+<meta property="og:url" content="http://devforum.azurewebsites.net/" />
+
+
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Developers Forum</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/typeahead.css" rel="stylesheet" />
+</head>
+<body style="font-family:Calibri">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Developers Forum", "Index1", "Post", new { area = "" }, new { @class = "navbar-brand" })
+
+            </div>
+            <div class="navbar-collapse collapse" style="font-size:large">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Post")</li>
+                    <li>@Html.ActionLink("About", "About", "Post")</li>
+                    <li>@Html.ActionLink("Post", "Create", "Post")</li>
+                    <li>@Html.ActionLink("Video", "Index", "Video")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Post")</li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                            Technology
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("ASP.Net", "aspnet", "Post")</li>
+                                <li>@Html.ActionLink("MVC", "mvc", "Post")</li>
+                                <li>@Html.ActionLink("Angular", "angular", "Index", "Video")</li>
+                            </ul>
+                        </a>
+                    </li>
+                </ul>
+                @*<div class="text-right">
+                    <form class="navbar-form" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="q">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>*@              
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <footer style="align-items :baseline">
+            <hr style="border:solid 1px gyay" />
+            <p style="font-family:Calibri">
+                Copyright © @DateTime.Now.Year - Developers Forum. All Rights Reserved.
+            </p>
+            <p><b>Rahul Shukla <br />Software Developer <br />Accenture </b></p>
+            <iframe src="//www.facebook.com/plugins/follow?href=https%3A%2F%2Fwww.facebook.com%2Frahul.shukla.904&amp;layout=standard&amp;show_faces=true&amp;colorscheme=light&amp;width=450&amp;height=80" 
+                    scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/typeahead")
+    <script src="~/Scripts/typeahead.mvc.model.js"></script>
+</body>
+</html>
+

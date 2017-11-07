@@ -1,0 +1,22 @@
+﻿@model IEnumerable<DiscussionForum.Models.Video>
+
+@{
+    ViewBag.Title = "VideoPlayList";
+}
+
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        
+        <div class="col-md-8" style="display:block; border-color:black; border:thin">
+            <h2>@item.videoTitle</h2>
+            <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/@item.videoLink" align="middle" width="854"
+                    height="480" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+}
+
+
+

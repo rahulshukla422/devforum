@@ -1,0 +1,46 @@
+﻿@model PagedList.IPagedList<DiscussionForum.Models.POST>
+@using DiscussionForum.Models
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-9">
+            <h2>@Html.ActionLink("Post Your Question Here", "Create", null, new { @class = "btn btn-info" })</h2>
+        </div>
+        <div class="col-md-3" style="text-align:center">
+            <br />
+            @Html.TextBox("SearchString", null, new { @placeholder = " Search Post", style = "width: 300px", @class = "form-control" })
+        </div>
+
+    </div>
+}
+<br />
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-12 table-bordered ">
+                <h2 class="" style="font-family:'Sans-Serif'">  @Html.ActionLink(item.postTitle, "Details", new { postId = item.postId })</h2>
+
+                @Html.ActionLink(item.COMMENTs.Count().ToString(), "Details", new { postId = item.postId })
+                @Html.ActionLink("Comments", "Comment", new { postId = item.postId }) |
+                <abbr style="color:blue; font-size:small" title="@item.postedDate">@item.postedDate</abbr>
+            </div>
+        </div>
+        <hr />
+    }
+</div>
+
+
+<div id="Paging" style="text-align:center">
+    Page @(Model.PageCount < Model.PageNumber ? 1 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index1", new { page }))
+</div>

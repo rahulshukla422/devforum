@@ -1,0 +1,52 @@
+﻿@model DiscussionForum.Models.POST
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Register Post</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "" })
+        <div class="form-group">
+            @Html.Label("Title", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.postTitle, new { htmlAttributes = new { @class = "form-control", @required = "required", @placeholder = "Enter subject here .." } })
+                @Html.ValidationMessageFor(model => model.postTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.postDesc,
+               new
+               {
+                   htmlAttributes =
+               new { @class = "form-control required", @cols = 100, @rows = 100, @aria_required = true, @Type = "multiline", @placeholder = "You can now start writing here.." }
+               })
+                @*@Html.ValidationMessageFor(model => model.postDesc, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Post Topic" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

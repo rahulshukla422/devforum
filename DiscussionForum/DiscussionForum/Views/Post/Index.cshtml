@@ -1,0 +1,61 @@
+﻿@model PagedList.IPagedList<DiscussionForum.Models.POST>
+@using DiscussionForum.Models
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-9">
+            <h2>@Html.ActionLink("Post Your Question Here", "Create", null, new { @class = "btn btn-info" })</h2>
+        </div>
+        <div class="col-md-3" style="text-align:center">
+            <br />
+            @Html.TextBox("SearchString", null, new { @placeholder = " Search Post", style = "width: 300px", @class = "form-control" })
+        </div>
+
+    </div>
+}
+<br />
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="row well">
+            <div class="col-md-12">
+                <h1 class="display-3">  @Html.ActionLink(item.postTitle, "Details", new { postId = item.postId })</h1>
+            </div>
+
+            <div class="col-md-12">
+
+<pre style="white-space:pre-wrap;">
+@{ 
+    int minVal = 250;
+    if (item.postDesc.Count() > minVal)
+    {
+        var data = item.postDesc.Substring(0, minVal);
+        @Html.DisplayFor(modelItem => data);<br />
+        @Html.ActionLink("Read More", "Details", new { postId = item.postId }, new { @class = "btn btn-info" })
+    }
+    else
+    {
+        @Html.DisplayFor(modelItem => item.postDesc);
+     }
+    }
+</pre>
+                @Html.ActionLink(item.COMMENTs.Count().ToString(), "Details", new { postId = item.postId })
+                @Html.ActionLink("Comments", "Comment", new { postId = item.postId }) |
+                <abbr style="color:blue; font-size:small" title="@item.postedDate">@item.postedDate</abbr>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div id="Paging" style="text-align:center">
+    Page @(Model.PageCount < Model.PageNumber ? 1 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

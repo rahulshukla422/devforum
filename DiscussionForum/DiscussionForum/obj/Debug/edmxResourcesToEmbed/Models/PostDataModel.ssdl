@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="COMMENT">
+    <Key>
+      <PropertyRef Name="commentId" />
+    </Key>
+    <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="commentDesc" Type="nvarchar(max)" />
+    <Property Name="postId" Type="int" />
+    <Property Name="postedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="POST">
+    <Key>
+      <PropertyRef Name="postId" />
+    </Key>
+    <Property Name="postId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="postTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="postDesc" Type="nvarchar(max)" />
+    <Property Name="postedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Videos">
+    <Key>
+      <PropertyRef Name="videoId" />
+    </Key>
+    <Property Name="videoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="videoLink" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="videoTitle" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VideoCategory" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__COMMENT__postId__5EBF139D">
+    <End Role="POST" Type="Self.POST" Multiplicity="0..1" />
+    <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POST">
+        <PropertyRef Name="postId" />
+      </Principal>
+      <Dependent Role="COMMENT">
+        <PropertyRef Name="postId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelsStoreContainer">
+    <EntitySet Name="COMMENT" EntityType="Self.COMMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POST" EntityType="Self.POST" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__COMMENT__postId__5EBF139D" Association="Self.FK__COMMENT__postId__5EBF139D">
+      <End Role="POST" EntitySet="POST" />
+      <End Role="COMMENT" EntitySet="COMMENT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
