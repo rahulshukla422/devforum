@@ -131,8 +131,8 @@ namespace DiscussionForum.Controllers
         {
             try
             {
-                string from = "rahulshukla422@gmail.com";
-                string pass = "katra_0662874";
+                string from = "youremail@gmail.com";
+                string pass = "yourpassword";
 
 
                 MailMessage mail = new MailMessage();
